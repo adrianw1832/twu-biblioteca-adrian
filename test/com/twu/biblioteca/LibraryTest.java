@@ -35,13 +35,30 @@ public class LibraryTest {
     }
 
     @Test
+    public void movieCollectionSizeTest() {
+        library.setUpMovieCollection();
+        assertEquals(2, library.movieCollection.size());
+    }
+
+    @Test
     public void bookCollectionListTest() {
         library.setUpBookCollection();
         library.listBooks();
         String consoleList = outContent.toString();
-        assertTrue(consoleList, consoleList.contains("Book1"));
-        assertTrue(consoleList, consoleList.contains("Adrian"));
-        assertTrue(consoleList, consoleList.contains("2016"));
+        assertTrue(consoleList.contains("Book1"));
+        assertTrue(consoleList.contains("Adrian"));
+        assertTrue(consoleList.contains("2016"));
+    }
+
+    @Test
+    public void movieCollectionListTest() {
+        library.setUpMovieCollection();
+        library.listMovies();
+        String consoleList = outContent.toString();
+        assertTrue(consoleList.contains("Movie1"));
+        assertTrue(consoleList.contains("Adrian"));
+        assertTrue(consoleList.contains("2016"));
+        assertTrue(consoleList.contains("10"));
     }
 
     @Test
@@ -64,9 +81,9 @@ public class LibraryTest {
 //        library.checkOutBook("Book1");
 //        library.listBooks();
 //        String consoleList = outContent.toString();
-//        assertEquals(false, consoleList.contains(("Book1")));
-//        assertEquals(false, consoleList.contains("Adrian"));
-//        assertEquals(false, consoleList.contains("2016"));
+//        assertFalse(consoleList.contains(("Book1")));
+//        assertFalse(consoleList.contains("Adrian"));
+//        assertFalse(consoleList.contains("2016"));
 //    }
 
     @Test
@@ -83,6 +100,20 @@ public class LibraryTest {
         library.checkOutBook("Book1");
         String message = library.returnBook("Book4");
         assertEquals("That is not a valid book to return.", message);
+    }
+
+    @Test
+    public void loginSuccessMessageTest() {
+        library.setUpUsers();
+        String message = library.userLogin("123-4567", 1234);
+        assertEquals("You have logged in.", message);
+    }
+
+    @Test
+    public void loginFailureMessageTest() {
+        library.setUpUsers();
+        String message = library.userLogin("123-4568", 1234);
+        assertEquals("You have not logged in.", message);
     }
 }
 
