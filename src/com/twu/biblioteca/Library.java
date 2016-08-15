@@ -33,17 +33,57 @@ public class Library {
     }
 
     private void printInfo(ArrayList<Book> list) {
-        for(int i = 0; i < list.size(); i++) {
-            System.out.println(list.get(i).info());
+        for (int i = 0; i < list.size(); i++) {
+            if (list.get(i).isAvailable()) {
+                System.out.println(list.get(i).info());
+            }
+        }
+    }
+
+    Book findBook(String bookName) {
+        Book matchedBook = null;
+        Book currentBook;
+        for (int i = 0; i < bookCollection.size(); i++) {
+            currentBook = bookCollection.get(i);
+            if (currentBook.getTitle().equals(bookName)) {
+                matchedBook = currentBook;
+            }
+
+        }
+        return matchedBook;
+    }
+
+    String checkOutBook(String bookName) {
+        Book matchedBook = findBook(bookName);
+        if (matchedBook != null && matchedBook.isAvailable()) {
+            matchedBook.changeAvailability();
+            return "This book is now checked out. Enjoy!";
+        } else {
+            return "This book is not available. Sorry!";
+        }
+    }
+
+    String returnBook(String bookName) {
+        Book matchedBook = findBook(bookName);
+        if (matchedBook != null && !matchedBook.isAvailable()) {
+            matchedBook.changeAvailability();
+            return "Thank you for returning the book!";
+        } else {
+            return "That is not a valid book to return.";
         }
     }
 
     void setUpMenu() {
+        Boolean inUse = true;
+
+        while (inUse) {
             System.out.println("-- Actions --");
             System.out.println(
                     "Select an option: \n" +
                             " 1) List Books\n" +
-                            " 2) Quit\n"
+                            " 2) Check Out Books\n" +
+                            " 3) Return Books\n" +
+                            " 4) Quit\n"
             );
 
             int selection = input.nextInt();
@@ -52,17 +92,28 @@ public class Library {
             switch (selection) {
                 case 1:
                     listBooks();
-                    setUpMenu();
                     break;
                 case 2:
+                    System.out.println("Please enter the name of the book!");
+                    String userInput = input.nextLine();
+                    String message = checkOutBook(userInput);
+                    System.out.println(message);
+                    break;
+                case 3:
+                    System.out.println("Please enter the name of the book!");
+                    String userInput1 = input.nextLine();
+                    String message1 = returnBook(userInput1);
+                    System.out.println(message1);
+                    break;
+                case 4:
                     System.out.println("See you!");
+                    inUse = false;
                     break;
                 default:
                     System.out.println("Select a valid option!");
-                    setUpMenu();
                     break;
             }
-
+        }
     }
 }
 
