@@ -3,6 +3,7 @@ package com.twu.biblioteca;
 
 import org.junit.*;
 import java.io.*;
+import java.util.ArrayList;
 
 import static org.junit.Assert.assertArrayEquals;
 import static org.junit.Assert.assertEquals;
@@ -26,5 +27,11 @@ public class LibraryTest {
         library.callGreeting();
         String consoleGreeting = outContent.toString();
         assertEquals("Welcome to the library!\n", consoleGreeting);
+    }
+
+    @Test
+    public void bookCollectionSizeTest() {
+        library.setUpBookCollection();
+        assertEquals(3, library.bookCollection.size());
     }
 }
