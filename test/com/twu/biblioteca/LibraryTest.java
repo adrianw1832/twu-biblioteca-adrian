@@ -7,6 +7,7 @@ import java.util.ArrayList;
 
 import static org.junit.Assert.assertArrayEquals;
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 public class LibraryTest {
     final ByteArrayOutputStream outContent = new ByteArrayOutputStream();
@@ -33,5 +34,15 @@ public class LibraryTest {
     public void bookCollectionSizeTest() {
         library.setUpBookCollection();
         assertEquals(3, library.bookCollection.size());
+    }
+
+    @Test
+    public void bookCollectionListTest() {
+        library.setUpBookCollection();
+        library.listBooks();
+        String consoleList = outContent.toString();
+        assertTrue(consoleList, consoleList.contains("Book1"));
+        assertTrue(consoleList, consoleList.contains("Adrian"));
+        assertTrue(consoleList, consoleList.contains("2016"));
     }
 }
