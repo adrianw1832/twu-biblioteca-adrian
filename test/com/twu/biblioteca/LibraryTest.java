@@ -46,3 +46,4 @@ public class LibraryTest {
         assertTrue(consoleList, consoleList.contains("2016"));
     }
 }
+

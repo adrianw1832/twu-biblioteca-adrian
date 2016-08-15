@@ -1,14 +1,17 @@
 package com.twu.biblioteca;
 
 import java.util.ArrayList;
+import java.util.Scanner;
 
 public class Library {
+    private Scanner input = new Scanner(System.in);
 
     ArrayList<Book> bookCollection = new ArrayList<Book>();
 
     void initialize() {
         setUpBookCollection();
         callGreeting();
+        setUpMenu();
     }
 
     void callGreeting() {
@@ -33,6 +36,33 @@ public class Library {
         for(int i = 0; i < list.size(); i++) {
             System.out.println(list.get(i).info());
         }
+    }
+
+    void setUpMenu() {
+            System.out.println("-- Actions --");
+            System.out.println(
+                    "Select an option: \n" +
+                            " 1) List Books\n" +
+                            " 2) Quit\n"
+            );
+
+            int selection = input.nextInt();
+            input.nextLine();
+
+            switch (selection) {
+                case 1:
+                    listBooks();
+                    setUpMenu();
+                    break;
+                case 2:
+                    System.out.println("See you!");
+                    break;
+                default:
+                    System.out.println("Select a valid option!");
+                    setUpMenu();
+                    break;
+            }
+
     }
 }
 
