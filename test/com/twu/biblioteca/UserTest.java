@@ -5,7 +5,7 @@ import org.junit.Test;
 import static org.junit.Assert.*;
 
 public class UserTest {
-    User user = new User("123-4567", 1234);
+    User user = new User("Adrian", "adrian@test.com", "12345678", "123-4567", 1234);
 
     @Test
     public void getLibraryNumberTest() {

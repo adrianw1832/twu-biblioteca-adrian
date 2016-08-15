@@ -40,8 +40,8 @@ public class Library {
     }
 
     void setUpUsers() {
-        User user1 = new User("123-4567", 1234);
-        User user2 = new User("223-4567", 1234);
+        User user1 = new User("Adrian", "adrian@test.com", "12345678", "123-4567", 1234);
+        User user2 = new User("Bob", "bob@test.com", "23456789", "123-4568", 2345);
         userCollection.add(user1);
         userCollection.add(user2);
     }
@@ -71,12 +71,14 @@ public class Library {
     }
 
     void listBooks() {
-        System.out.printf( "%-27s%-27s%-27s", "Title", "Author", "Year Published");
+        System.out.printf("%-27s%-27s%-27s", "Title", "Author", "Year Published");
+        System.out.println();
         printBookInfo(bookCollection);
     }
 
     void listMovies() {
-        System.out.printf( "%-27s%-27s%-27s%-27s", "Title", "Director", "Year Made", "Rating");
+        System.out.printf("%-27s%-27s%-27s%-27s", "Title", "Director", "Year Made", "Rating");
+        System.out.println();
         printMovieInfo(movieCollection);
     }
 
@@ -148,6 +150,12 @@ public class Library {
         }
     }
 
+    void userInfo() {
+        System.out.printf("%-27s%-27s%-27s", "Name", "Email", "Phone");
+        System.out.println();
+        System.out.println(matchedUser.info());
+    }
+
     void setUpMenu() {
         Boolean inUse = true;
 
@@ -160,7 +168,8 @@ public class Library {
                             " 3) Return Books\n" +
                             " 4) List Movies\n" +
                             " 5) Check Out Movies\n" +
-                            " 6) Quit\n"
+                            " 6) User Info\n" +
+                            " 7) Quit\n"
             );
 
             int selection = input.nextInt();
@@ -194,6 +203,10 @@ public class Library {
                     System.out.println(message2);
                     break;
                 case 6:
+                    loginPrompt();
+                    userInfo();
+                    break;
+                case 7:
                     System.out.println("See you!");
                     inUse = false;
                     break;
